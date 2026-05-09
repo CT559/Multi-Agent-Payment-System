@@ -51,7 +51,7 @@ export default function AgentsPage() {
       setResults(p => ({ ...p, [agentId]: data.result }))
 
       // Fee calculation (0.1% of amount)
-      const fee = agent.pricePerCall / 1000n
+      const fee = agent.pricePerCall / BigInt(1000)  // ✅
 
       // Record payment
       const payment: Payment = {

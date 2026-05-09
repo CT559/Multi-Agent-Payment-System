@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: (config) => {
-    config.externals.push('pino-pretty', 'lokijs', 'encoding')
-    return config
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@react-native-async-storage/async-storage': 
+        require.resolve('./src/lib/asyncStorageShim.js'),
+    };
+    return config;
   },
-  // Next.js 15: silence punycode deprecation from WalletConnect internals
-  experimental: {
-    serverComponentsExternalPackages: ['pino', 'pino-pretty'],
-  },
-}
-module.exports = nextConfig
+};
+
+module.exports = nextConfig;
